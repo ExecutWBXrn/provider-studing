@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'providers/themeVN.dart';
 import 'providers/changeTextColor.dart';
 import 'package:provider/provider.dart';
+import 'providers/timerProvider.dart';
 
 final ValueNotifier<bool> isDarkMode = ValueNotifier<bool>(false);
 
@@ -32,7 +33,11 @@ class MyAppState extends State<MyApp> {
       home: Scaffold(
         body: IndexedStack(
           index: index,
-          children: [ChangeTheme(context), ChangeTextColor(context)],
+          children: [
+            ChangeTheme(context),
+            ChangeTextColor(context),
+            TimerPage(),
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,
