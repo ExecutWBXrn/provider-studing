@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_projects/main.dart';
 
-Widget ChangeTheme() {
+Widget ChangeTheme(BuildContext context) {
+  final bool _themeMode = context.watch<bool>();
   return Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [Switch(value: false, onChanged: null)],
+      children: [
+        Switch(
+          value: _themeMode,
+          onChanged: (_) => {isDarkMode.value = !isDarkMode.value},
+        ),
+      ],
     ),
   );
 }

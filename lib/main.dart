@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'providers/themeVN.dart';
+import 'package:provider/provider.dart';
+
+final ValueNotifier<bool> isDarkMode = ValueNotifier<bool>(false);
 
 void main() {
-  runApp(MyApp());
+  runApp(ValueListenableProvider.value(value: isDarkMode, child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -13,14 +16,23 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+  int index = 0;
+
+  void onTapIndex(int index) {
+    setState(() {
+      this.index = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: isDarkMode.value ? ThemeData.dark() : ThemeData.light(),
       home: Scaffold(
-        body: IndexedStack(index: 0, children: [ChangeTheme()]),
+        body: IndexedStack(index: index, children: [ChangeTheme(context)]),
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
-          onTap: null,
+          currentIndex: index,
+          onTap: onTapIndex,
           fixedColor: Colors.blue,
           backgroundColor: Colors.blueGrey,
           unselectedItemColor: Colors.blueGrey,
@@ -39,15 +51,15 @@ class MyAppState extends State<MyApp> {
               label: "To-Do list",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.radio_button_checked),
+              icon: Icon(Icons.note_alt),
               label: "NotesModel",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.radio_button_checked),
+              icon: Icon(Icons.calculate_outlined),
               label: "Calculator",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.radio_button_checked),
+              icon: Icon(Icons.favorite),
               label: "Favorite goods",
             ),
           ],
