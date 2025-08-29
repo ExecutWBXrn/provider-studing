@@ -4,15 +4,18 @@ import 'package:provider_projects/main.dart';
 
 Widget ChangeTheme(BuildContext context) {
   final bool _themeMode = context.watch<bool>();
-  return Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Switch(
-          value: _themeMode,
-          onChanged: (_) => {isDarkMode.value = !isDarkMode.value},
-        ),
-      ],
+  return Scaffold(
+    appBar: AppBar(title: Text("Change theme"), centerTitle: true),
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Switch(
+            value: _themeMode,
+            onChanged: (_) => {isDarkMode.value = !isDarkMode.value},
+          ),
+        ],
+      ),
     ),
   );
 }

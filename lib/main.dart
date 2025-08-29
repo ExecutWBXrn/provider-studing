@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'providers/themeVN.dart';
+import 'providers/changeTextColor.dart';
 import 'package:provider/provider.dart';
 
 final ValueNotifier<bool> isDarkMode = ValueNotifier<bool>(false);
@@ -29,7 +30,10 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: isDarkMode.value ? ThemeData.dark() : ThemeData.light(),
       home: Scaffold(
-        body: IndexedStack(index: index, children: [ChangeTheme(context)]),
+        body: IndexedStack(
+          index: index,
+          children: [ChangeTheme(context), ChangeTextColor(context)],
+        ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,
           onTap: onTapIndex,
@@ -43,7 +47,7 @@ class MyAppState extends State<MyApp> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.radio_button_checked),
-              label: "Change Button color",
+              label: "Change text color",
             ),
             BottomNavigationBarItem(icon: Icon(Icons.timer), label: "Timer"),
             BottomNavigationBarItem(
